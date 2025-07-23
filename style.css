@@ -1,116 +1,281 @@
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@300&display=swap');
+
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: 'Roboto', sans-serif;
   background-image: url("img/bg1.jpg");
-  min-height: 92vh;
-  overflow: auto;
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
+  min-height: 92vh;
+  line-height: 1.5;
 }
 
-.header h4 {
-  color: #da1e4e;
-  font-weight: 700;
-  font-size: 2.4rem;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
+/* App container */
 .app-main {
-  min-height: 10vh;
-  width: 30vw;
-  margin: 50px auto;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 90vh;
+  width: 100vw;
+  padding: 40px 0;
+}
+
+/* Weather card */
+.weather-card {
+  width: 90%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 48px 32px;
+  margin: 40px auto 20px;
   text-align: center;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  border-radius: 15px;
-  background: #c0dfec; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #92fe9d,
-    #c0dfec
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #92fe9d,
-    #c0dfec
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  font-size: 1.2rem;
 }
-.app-main > * {
+
+/* Layout structure */
+.main-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+  gap: 40px;
+}
+
+.left-panel,
+.right-panel {
+  flex: 1;
+  min-width: 280px;
+  background: #e0e7ef;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.07);
+  color: #222;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search Input inside left-panel */
+.searchInputBox {
+  position: relative;
+  width: 100%;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
+
+.searchInputBox i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #1976d2;
+  z-index: 1;
+}
+
 .input-box {
   width: 100%;
   background: azure;
-  color: #e4603a;
+  color: #1976d2;
   font-weight: 500;
   border: none;
-  font-size: 1.7rem;
+  font-size: 1.1rem;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 10px 10px 36px;
   text-align: center;
   outline: none;
-  border: none;
+  margin-bottom: 16px;
 }
 
-.weather-body {
-  color: #fff;
-  padding: 20px;
-  line-height: 2rem;
-  border-radius: 10px;
-  background-color: #eff1f3;
-  display: none;
-  background: linear-gradient(
-    to top,
-    #da1e4e,
-    #e4603a
-  );
+/* Weather body & forecast */
+.weather-body,
+.forecast-body {
+  margin-top: 24px;
+  border-radius: 12px;
+  background: #f7f9fa;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.location-deatils {
+
+.weather-body .temp,
+.weather-body .min-max {
+  font-size: 2rem;
   font-weight: bold;
 }
-.weather-status {
-  padding: 20px;
-}
-.temp {
-  font-size: 5rem;
-  font-weight: 700;
-  margin-bottom: 20px 0px;
-  text-shadow: 2px 4px rgba(0, 0, 0, 0.1);
-}
-.weather {
-  margin-top: 25px;
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-.min-max {
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-top: 15px;
+
+.weather-body .temp {
+  color: #1976d2;
 }
 
-.day_details {
-  padding: 20px;
+.weather-body img {
+  width: 80px;
+  height: 80px;
+  margin-top: 16px;
 }
-.sun-detail,
-.basic {
+
+.weather-body .weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather-body .weather img {
+  width: 60px;
+  height: 60px;
+}
+
+/* Forecast */
+.forecast-body {
+  background: #ffffff;
+  padding: 24px;
+}
+
+.forecast-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.forecast-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.forecast-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 6px;
+}
+
+.forecast-card {
+  flex: 0 0 auto;
+  width: 180px;
+  background: #f7f9fa;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  min-height: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
-}
-#weather-icon {
-  color: black;
+  scroll-snap-align: start;
+
+  /* Interactive animations */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
+.forecast-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  background: #eaf2f9;
+  cursor: pointer;
+}
 
-@media screen and (max-width: 800px) {
-  .app-main {
-    width: 95%;
-    padding: 10px;
+.forecast-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
+}
+
+.forecast-card .date {
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.forecast-card .temp {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.forecast-card .weather {
+  color: #555;
+}
+
+/* Loading and footer */
+.loading-message {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #1976d2;
+  padding: 20px 0;
+}
+
+.footer {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 1rem;
+  padding: 20px 0 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
   }
-  body {
-    min-height: 94vh;
+
+  .left-panel,
+  .right-panel {
+    max-width: 100%;
+    padding: 18px 8px;
+  }
+
+  .weather-card {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .weather-card {
+    max-width: 98vw;
+    padding: 16px 4px;
+  }
+
+  .weather-body {
+    padding: 24px;
+    align-items: center;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .forecast-list {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .forecast-card {
+    width: 160px;
+    font-size: 0.95rem;
   }
 }
