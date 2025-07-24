@@ -37,13 +37,13 @@ body.snowy {
   align-items: flex-start;
   min-height: 90vh;
   width: 100vw;
-  padding: 40px 0;
+  padding: 40px 20px;
 }
 
 /* Weather card */
 .weather-card {
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 1200px;
   background: #ffffff;
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
@@ -63,9 +63,8 @@ body.snowy {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 0 20px;
+  margin: 0;
+  padding: 0;
   gap: 40px;
 }
 
@@ -93,16 +92,14 @@ body.snowy {
 
 .searchInputBox i {
   position: absolute;
-  left: 10px;
-  left: 12px;
-  top:50%;
+  top: 40%;
   transform: translateY(-50%);
-  font-size: 1.2em; /* proportional to input font-size */
+  font-size: 2rem;
   color: #1976d2;
   z-index: 1;
-  pointer-events: none; 
-  padding-bottom: 10px;
-  /* icon not clickable */
+  pointer-events: none;
+  transition: color 0.3s ease;
+  margin-left: 5px;
 }
 
 .input-box {
@@ -111,15 +108,15 @@ body.snowy {
   color: #1976d2;
   font-weight: 500;
   border: none;
-  font-size: 1.1rem; /* about 17.6px */
+  font-size: 1.1rem;
   border-radius: 10px;
-  padding: 10px 10px 10px 36px; /* space for icon */
+  padding: 12px 12px 12px 42px;
   text-align: center;
   outline: none;
   margin-bottom: 16px;
   transition: all 0.3s ease-in-out;
   line-height: 1.2;
-  height: 40px; /* fixed height for consistency */
+  min-height: 48px;
 }
 
 .input-box:focus {
@@ -139,10 +136,12 @@ body.snowy {
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 10px 22px;
+  padding: 12px 24px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  min-height: 48px;
+  min-width: 120px;
 }
 
 #unit-toggle-btn:hover {
@@ -169,6 +168,7 @@ body.snowy {
   gap: 12px;
   transition: all 0.3s ease;
 }
+
 .weather-body:hover {
   transform: scale(1.02);
 }
@@ -208,6 +208,7 @@ body.snowy {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   transition: all 0.3s ease;
+  color: #bde0f8;
 }
 
 .forecast-list {
@@ -220,6 +221,7 @@ body.snowy {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
+  color: #1976d2;
 }
 
 .forecast-list::-webkit-scrollbar {
@@ -235,6 +237,7 @@ body.snowy {
   flex: 0 0 auto;
   width: 180px;
   background: linear-gradient(135deg, #f0f4f8, #ffffff);
+  color: #1976d2;
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
@@ -278,7 +281,14 @@ body.snowy {
   color: #555;
 }
 
-/* Optional Loading Spinner */
+/* Loading Spinner */
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 .loading-spinner {
   border: 6px solid #e0e0e0;
   border-top: 6px solid #1976d2;
@@ -286,7 +296,6 @@ body.snowy {
   width: 48px;
   height: 48px;
   animation: spin 0.8s linear infinite;
-  margin: 20px auto;
 }
 
 @keyframes spin {
@@ -300,13 +309,322 @@ body.snowy {
   color: #888;
   margin-top: 40px;
   font-size: 1rem;
-  padding: 20px 0 10px;
+  padding: 20px 10px 10px;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* Responsive Design */
+
+/* Large Desktop (1200px and above) */
+@media (min-width: 1200px) {
+  .weather-card {
+    padding: 60px 48px;
+  }
+  
+  .main-layout {
+    gap: 60px;
+  }
+  
+  .left-panel,
+  .right-panel {
+    padding: 32px;
+  }
+}
+
+/* Desktop/Tablet landscape (768px to 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .weather-card {
+    padding: 40px 24px;
+  }
+  
+  .main-layout {
+    gap: 30px;
+  }
+  
+  .left-panel,
+  .right-panel {
+    min-width: 320px;
+    padding: 20px;
+  }
+}
+
+/* Tablet portrait and small desktop (769px to 900px) */
+@media (max-width: 900px) and (min-width: 769px) {
+  .main-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .left-panel,
+  .right-panel {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+/* Mobile landscape and large mobile (481px to 768px) */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 20px 15px;
+  }
+  
+  .weather-card {
+    padding: 24px 16px;
+    margin: 20px auto 10px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+  }
+  
   .main-layout {
     flex-direction: column;
     gap: 20px;
+  }
+  
+  .left-panel,
+  .right-panel {
+    min-width: unset;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .weather-body {
+    padding: 24px;
+    margin-top: 16px;
+  }
+  
+  .weather-body .temp,
+  .weather-body .min-max {
+    font-size: 1.8rem;
+  }
+  
+  .forecast-card {
+    width: 160px;
+    height: 220px;
+    padding: 12px;
+  }
+  
+  .forecast-card .temp {
+    font-size: 1.3rem;
+  }
+  
+  .forecast-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+  }
+  
+  .footer {
+    font-size: 0.9rem;
+    margin-top: 20px;
+  }
+}
+
+/* Mobile portrait (320px to 480px) */
+@media (max-width: 480px) {
+  .app-main {
+    padding: 15px 10px;
+  }
+  
+  .weather-card {
+    padding: 20px 12px;
+    margin: 15px auto 10px;
+    gap: 16px;
+    font-size: 1rem;
+  }
+  
+  .left-panel,
+  .right-panel {
+    padding: 16px;
+  }
+  
+  .input-box {
+    font-size: 1rem;
+    padding: 10px 10px 10px 38px;
+    min-height: 44px;
+  }
+  
+  .searchInputBox i {
+    font-size: 1.1em;
+    left: 10px;
+  }
+  
+  #unit-toggle-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    min-height: 44px;
+    min-width: 100px;
+  }
+  
+  .weather-body {
+    padding: 20px;
+    font-size: 1rem;
+  }
+  
+  .weather-body .temp,
+  .weather-body .min-max {
+    font-size: 1.6rem;
+  }
+  
+  .weather-body img {
+    width: 70px;
+    height: 70px;
+    margin-top: 12px;
+  }
+  
+  .weather-body .weather img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .forecast-body {
+    padding: 16px;
+  }
+  
+  .forecast-list {
+    gap: 12px;
+  }
+  
+  .forecast-card {
+    width: 140px;
+    height: 200px;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .forecast-card .temp {
+    font-size: 1.2rem;
+  }
+  
+  .forecast-card img {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 10px;
+  }
+  
+  .forecast-card .date {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+  
+  .footer {
+    font-size: 0.8rem;
+    padding: 15px 5px 5px;
+    margin-top: 15px;
+  }
+}
+
+/* Extra small mobile (320px and below) */
+@media (max-width: 320px) {
+  .weather-card {
+    padding: 16px 8px;
+  }
+  
+  .left-panel,
+  .right-panel {
+    padding: 12px;
+  }
+  
+  .forecast-card {
+    width: 120px;
+    height: 180px;
+    padding: 8px;
+  }
+  
+  .forecast-card .temp {
+    font-size: 1.1rem;
+  }
+  
+  .forecast-card img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-main {
+    padding: 10px 20px;
+  }
+  
+  .weather-card {
+    margin: 10px auto 5px;
+    padding: 16px 20px;
+  }
+  
+  .weather-body {
+    padding: 16px;
+    margin-top: 12px;
+  }
+  
+  .weather-body .temp,
+  .weather-body .min-max {
+    font-size: 1.4rem;
+  }
+  
+  .weather-body img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .forecast-card {
+    height: 160px;
+  }
+  
+  .footer {
+    margin-top: 10px;
+    padding: 10px 0 5px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .weather-body {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Improved accessibility for larger text */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .weather-card {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  .left-panel,
+  .right-panel {
+    background: #2d2d2d;
+    color: #ffffff;
+  }
+  
+  .input-box {
+    background: #333333;
+    color: #1976d2;
+  }
+  
+  .forecast-body {
+    background: #2d2d2d;
+  }
+  
+  .forecast-card {
+    background: linear-gradient(135deg, #333333, #2d2d2d);
+    color: #ffffff;
+  }
+  
+  .forecast-card:hover {
+    background: #404040;
   }
 }
