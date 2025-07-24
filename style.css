@@ -1,5 +1,5 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@300&display=swap');
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 /* Reset and base styles */
 * {
@@ -9,13 +9,25 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-image: url("img/bg1.jpg");
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
   min-height: 92vh;
   line-height: 1.5;
+  transition: background 0.5s ease-in-out;
+}
+
+/* Optional weather-themed backgrounds */
+body.sunny {
+  background-image: linear-gradient(to bottom, #ffe47a, #ffcc00);
+}
+body.rainy {
+  background-image: linear-gradient(to bottom, #6e8da7, #445c72);
+}
+body.snowy {
+  background-image: linear-gradient(to bottom, #d8f1ff, #bde0f8);
 }
 
 /* App container */
@@ -45,7 +57,7 @@ body {
   font-size: 1.2rem;
 }
 
-/* Layout structure */
+/* Layout */
 .main-layout {
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +82,7 @@ body {
   flex-direction: column;
 }
 
-/* Search Input inside left-panel */
+/* Search Input */
 .searchInputBox {
   position: relative;
   width: 100%;
@@ -81,12 +93,16 @@ body {
 
 .searchInputBox i {
   position: absolute;
-  top: 50%;
+  left: 10px;
   left: 12px;
+  top:50%;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 1.2em; /* proportional to input font-size */
   color: #1976d2;
   z-index: 1;
+  pointer-events: none; 
+  padding-bottom: 10px;
+  /* icon not clickable */
 }
 
 .input-box {
@@ -95,26 +111,66 @@ body {
   color: #1976d2;
   font-weight: 500;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* about 17.6px */
   border-radius: 10px;
-  padding: 10px 10px 10px 36px;
+  padding: 10px 10px 10px 36px; /* space for icon */
   text-align: center;
   outline: none;
   margin-bottom: 16px;
+  transition: all 0.3s ease-in-out;
+  line-height: 1.2;
+  height: 40px; /* fixed height for consistency */
 }
 
-/* Weather body & forecast */
-.weather-body,
-.forecast-body {
+.input-box:focus {
+  border: 1px solid #1976d2;
+  background-color: #f0faff;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+}
+
+/* Unit toggle */
+.unit-toggle-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#unit-toggle-btn {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#unit-toggle-btn:hover {
+  background-color: #125ea7;
+}
+
+#unit-toggle-btn:focus,
+#unit-toggle-btn:active {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.4);
+}
+
+/* Weather Body */
+.weather-body {
   margin-top: 24px;
   border-radius: 12px;
-  background: #f7f9fa;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   padding: 32px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   font-size: 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: all 0.3s ease;
+}
+.weather-body:hover {
+  transform: scale(1.02);
 }
 
 .weather-body .temp,
@@ -149,6 +205,9 @@ body {
 .forecast-body {
   background: #ffffff;
   padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition: all 0.3s ease;
 }
 
 .forecast-list {
@@ -175,7 +234,7 @@ body {
 .forecast-card {
   flex: 0 0 auto;
   width: 180px;
-  background: #f7f9fa;
+  background: linear-gradient(135deg, #f0f4f8, #ffffff);
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
@@ -188,13 +247,11 @@ body {
   align-items: center;
   font-size: 1rem;
   scroll-snap-align: start;
-
-  /* Interactive animations */
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .forecast-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-6px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   background: #eaf2f9;
   cursor: pointer;
@@ -221,14 +278,23 @@ body {
   color: #555;
 }
 
-/* Loading and footer */
-.loading-message {
-  text-align: center;
-  font-size: 1.3rem;
-  color: #1976d2;
-  padding: 20px 0;
+/* Optional Loading Spinner */
+.loading-spinner {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #1976d2;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 0.8s linear infinite;
+  margin: 20px auto;
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Footer */
 .footer {
   text-align: center;
   color: #888;
@@ -237,45 +303,10 @@ body {
   padding: 20px 0 10px;
 }
 
-/* Responsive styles */
+/* Responsive */
 @media (max-width: 900px) {
   .main-layout {
     flex-direction: column;
     gap: 20px;
-    align-items: stretch;
-  }
-
-  .left-panel,
-  .right-panel {
-    max-width: 100%;
-    padding: 18px 8px;
-  }
-
-  .weather-card {
-    padding: 24px 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .weather-card {
-    max-width: 98vw;
-    padding: 16px 4px;
-  }
-
-  .weather-body {
-    padding: 24px;
-    align-items: center;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  .forecast-list {
-    flex-direction: row;
-    gap: 12px;
-  }
-
-  .forecast-card {
-    width: 160px;
-    font-size: 0.95rem;
   }
 }

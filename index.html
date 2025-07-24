@@ -17,6 +17,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
   <!-- SweetAlert CDN -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
@@ -33,15 +34,31 @@
             <i class="fas fa-search"></i>
           </div>
 
+          <!-- Unit toggle button -->
+          <div class="unit-toggle-container">
+            <button onclick="toggleUnit()" id="unit-toggle-btn">Switch to °F</button>
+          </div>
+
+          <!-- Weather Loader -->
+          <div id="loader" class="loading-spinner-container" style="display: none;">
+            <div class="loading-spinner"></div>
+          </div>
+
+          <!-- Current Weather -->
           <div class="weather-body" id="weather-body">
-            <!-- Current weather data will appear here -->
+            <!-- Weather data appears here -->
           </div>
         </div>
 
         <!-- Right panel: 5-day forecast -->
         <div class="right-panel">
+          <!-- Forecast Loader -->
+          <div id="forecast-loader" class="loading-spinner-container" style="display: none;">
+            <div class="loading-spinner"></div>
+          </div>
+
           <div class="forecast-body" id="forecast-body">
-            <!-- 5-day forecast will appear here -->
+            <!-- Forecast data appears here -->
           </div>
         </div>
 
@@ -53,7 +70,7 @@
     &copy; 2025 Weather App Denzel Aivan Palo. Powered by OpenWeatherMap.
   </footer>
 
-  <!-- External JavaScript file -->
+  <!-- External JavaScript -->
   <script src="script.js"></script>
 </body>
 
